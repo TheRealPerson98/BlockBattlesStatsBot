@@ -1,13 +1,18 @@
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Logged in as bot1181978674921214105
-[2023-12-10 12:58:41] [INFO    ] discord_bot: discord.py API version: 2.3.2
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Python version: 3.11.4
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Running on: Windows 10 (nt)
-[2023-12-10 12:58:41] [INFO    ] discord_bot: -------------------
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'eco'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'gambling'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'life'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'owner'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'rewards'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'template'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'tournament'
-[2023-12-10 12:58:41] [INFO    ] discord_bot: Loaded extension 'work'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Logged in as bot1181978674921214105
+[2023-12-12 12:30:09] [INFO    ] discord_bot: discord.py API version: 2.3.2
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Python version: 3.11.4
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Running on: Windows 10 (nt)
+[2023-12-12 12:30:09] [INFO    ] discord_bot: -------------------
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'application'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'bugs'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'eco'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'gambling'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'life'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'owner'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'rewards'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'setup'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'template'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'tournament'
+[2023-12-12 12:30:09] [INFO    ] discord_bot: Loaded extension 'work'
+[2023-12-12 12:31:28] [INFO    ] discord_bot: Executed sync command in Person98 Was Here (ID: 1152659783439097966) by person98 (ID: 292733309488857088)
+[2023-12-12 12:31:39] [INFO    ] discord_bot: Executed setup command in Person98 Was Here (ID: 1152659783439097966) by person98 (ID: 292733309488857088)

@@ -1,11 +1,3 @@
-"""
-Copyright © Krypton 2019-2023 - https://github.com/kkrypt0nn (https://krypton.ninja)
-Description:
-🐍 A simple template to start to code your own and personalized discord bot in Python programming language.
-
-Version: 6.1.0
-"""
-
 import json
 import logging
 import os
@@ -21,6 +13,10 @@ from dotenv import load_dotenv
 import aiohttp
 from buttons.tournamentview import TournamentView
 from data.database import Database
+from views.bugreportbiew import BugReportView
+from views.applicationselect import ApplicationSelect
+from discord.ui import View, Select
+from views.applicationreviewview import ApplicationReviewView
 
 if not os.path.isfile(f"{os.path.realpath(os.path.dirname(__file__))}/config.json"):
     sys.exit("'config.json' not found! Please add it and try again.")
@@ -190,8 +186,8 @@ class DiscordBot(commands.Bot):
         self.status_task.start()
         self.update_mc_server_stats.start() 
         db_path = 'data/database.sqlite'
-        database = Database(db_path)
-        database._initialize_db()
+        self.db = Database(db_path)
+        self.db._initialize_db()
         
     async def on_ready(self):
         try:
@@ -213,6 +209,61 @@ class DiscordBot(commands.Bot):
         except (FileNotFoundError, json.JSONDecodeError):
             # File not found or invalid, handle appropriately
             pass
+        all_bugs = self.db.get_all_bugs()
+
+        for bug in all_bugs:
+            channel_id = int(bug['ChannelID'])
+            message_id = int(bug['MessageID'])
+            channel = self.get_channel(channel_id)
+
+            if channel:
+                try:
+                    message = await channel.fetch_message(message_id)
+                    guild_info = self.db.get_all_guild_info(bug['GuildID'])
+
+                    # Reattach the BugReportView to the message
+                    view = BugReportView(self.db, bug['BugID'], guild_info, self)
+                    await message.edit(view=view)
+                except Exception as e:
+                    print(f'Error reattaching view to bug report: {e}')
+        try:
+            with open("data/application_message_info.txt", "r") as file:
+                message_info = file.read().strip().split(',')
+                if len(message_info) == 2:
+                    message_id, channel_id = int(message_info[0]), int(message_info[1])
+                    channel = self.get_channel(channel_id)
+                    if channel:
+                        message = await channel.fetch_message(message_id)
+                        applications = self.get_cog("application").get_applications()
+                        view = View()
+                        view.add_item(ApplicationSelect(applications, self.db, self))
+                        await message.edit(view=view)
+                    else:
+                        print("Channel not found.")
+                else:
+                    print("Invalid message info format.")
+        except FileNotFoundError:
+            print("Application message info file not found.")
+        except Exception as e:
+            print(f"Error reattaching view: {e}")
+                
+        review_messages = self.db.get_application_review_messages()
+
+        for guild_id, channel_id, message_id, application_id in review_messages:
+            guild = self.get_guild(int(guild_id))
+            if not guild:
+                continue
+
+            channel = guild.get_channel(int(channel_id))
+            if not channel:
+                continue
+
+            try:
+                message = await channel.fetch_message(int(message_id))
+                view = ApplicationReviewView(self.db, channel_id, application_id, self, guild_id)
+                await message.edit(view=view)
+            except Exception as e:
+                print(f"Error reattaching view: {e}")
 
     async def resend_tournament_embed(self, channel, tournament_name):
         # Logic to resend the embed
